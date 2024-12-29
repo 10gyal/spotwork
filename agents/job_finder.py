@@ -90,9 +90,9 @@ def validate(url: str):
         validation["status"] = 4
 
     # append validation to validation.json
-    with open("validation.json", "a") as f:
+    with open('validation.json', 'a') as f:
         json.dump(validation, f, indent=2)
-    
+        
     return validation
      
 # recursively call validate() until status == 4 for all links
