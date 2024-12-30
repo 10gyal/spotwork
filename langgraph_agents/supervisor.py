@@ -1,7 +1,7 @@
 import os
 import time
 from concurrent.futures import ThreadPoolExecutor
-from .agents import JobFinder
+from .langgraph_agents import JobFinder
 from langgraph.graph import StateGraph, START
 from IPython.display import Image, display
 

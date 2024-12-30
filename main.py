@@ -34,16 +34,16 @@ def process_job_postings(url: str) -> List[Dict]:
         })
         
     # Save all curated jobs to a single file
-    output_file = 'processed_jobs.json'
+    output_file = './data/curated_jps.json'
     with open(output_file, 'w') as f:
         json.dump({"jobs": curated_jobs}, f, indent=2)
     
-    print(f"\nProcessed {len(curated_jobs)} jobs. Results saved to {output_file}")
+    print(f"Curated {len(curated_jobs)} jobs. Results saved to {output_file}")
     return curated_jobs
 
 if __name__ == "__main__":
     # Example usage with a starting URL
-    starting_url = "https://jobs.ashbyhq.com/permitflow?departmentId=d33195eb-8978-4439-abc6-5a8a072de808"
+    starting_url = "https://www.ycombinator.com/companies/hyperdx/jobs"
     processed_jobs = process_job_postings(starting_url)
     
     # Display results
@@ -53,3 +53,4 @@ if __name__ == "__main__":
             print(f"\n{i}. Job URL: {job['url']}")
             print("Curated Content:")
             print(job['curated_content'])
+ 

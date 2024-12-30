@@ -15,6 +15,7 @@ load_dotenv()
 
 class CuratedResponse(BaseModel):
     curated_content: str = Field(..., description="The curated job posting extracted from the webpage content.")
+    contact_info: str = Field(..., description="Contact information of the recruiting company.")
 
 
 SYSTEM_PROMPT = """You are a specialized AI assistant. You receive raw text from a scraped job posting page, which may include extraneous details like images, links, or irrelevant marketing statements. Your goal is to create a clean, concise job posting that includes only the essential information necessary for a candidate to understand the role at a glance.
@@ -28,7 +29,7 @@ SYSTEM_PROMPT = """You are a specialized AI assistant. You receive raw text from
 - Key Responsibilities (a short summary)
 - Key Requirements / Qualifications
 - Any Important Notes on Work Environment (e.g., remote vs. on-site, travel requirements, etc.)
-- How to Apply (if directly stated in the text; otherwise omit)
+- Contact Information for Applying (e.g., application link, email address)
 
 2. Details to Exclude or Remove:
 - Hyperlinks (unless they are the direct application link)
@@ -49,7 +50,7 @@ SYSTEM_PROMPT = """You are a specialized AI assistant. You receive raw text from
 - Compensation: $100K–$180K base + 0.5%–2.5% equity
 - Responsibilities: Develop and deploy AI systems for commercial insurance, manage large-scale data flows, etc.
 - Requirements: Experience with modern AI/ML stack, shipping production AI, comfort with rapid iteration, etc.
-- How to Apply: [Include direct application link if explicitly stated]
+- Contact: Apply at [Application Link] or email [Email Address]
 
 Your response must strictly adhere to these guidelines, providing only the most pertinent details for potential job applicants and nothing else. The goal is to produce a succinct, professional job posting that a candidate can quickly review and understand.
 """
@@ -58,6 +59,7 @@ def curate(content: str) -> str:
     client = OpenAI()
     response = client.beta.chat.completions.parse(
         model="gpt-4o-mini",
+        max_tokens=8000,
         messages=[
             {"role": "system", "content": SYSTEM_PROMPT},
             {"role": "user", "content": content}
@@ -72,14 +74,14 @@ def curate(content: str) -> str:
 
 if __name__ == "__main__":
     ## read content from validation.json
-    with open('validation.json', 'r') as f:
+    with open('./data/jps_found.json', 'r') as f:
         content = json.load(f)
         curated_content = {
             "url": content["url"],
             "curated_content": curate(content["site_content"])
         }
         # save curated content to curated.json
-        with open('curated.json', 'a') as f:
+        with open('./data/curated_jps.json', 'a') as f:
             json.dump({"curated_content": curated_content}, f, indent=2)
 
 

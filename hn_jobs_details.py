@@ -21,7 +21,7 @@ def fetch_job_details():
     
     # Save to JSON file
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    filename = f"hn_jobs_{timestamp}.json"
+    filename = f"./data/hn_jobs_{timestamp}.json"
     
     with open(filename, 'w') as f:
         json.dump(jobs_data, f, indent=2)
