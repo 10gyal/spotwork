@@ -10,6 +10,19 @@ from pydantic import BaseModel, Field
 from typing import List, Dict
 
 
+
+def get_job_posting():
+    """
+    Get the job posting from the database.
+    """
+    pass
+
+def get_resume(candidate_id: str):
+        """
+        Get the resume from the database.
+        """
+        pass
+
 def validate(job_posting: str):
         """
         Validate the candidate based on the job posting. Return if the candidate is a good fit or not along with the reasons.
