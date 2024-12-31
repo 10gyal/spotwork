@@ -40,6 +40,7 @@ class SearchRequest:
         response = requests.request("POST", SEARCH_URL, headers=headers, data=payload)
         return self._get_resume_ids(response.text)
     
+
 if __name__ == "__main__":
     q = "React Developer"
     x = SearchRequest(q)

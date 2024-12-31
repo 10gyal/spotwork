@@ -1,5 +1,5 @@
-from agents.job_finder import recursive_validate
-from agents.post_curator import curate
+from vanilla_agents.job_finder import recursive_validate
+from vanilla_agents.post_curator import curate
 import json
 from typing import List, Dict
 import os
