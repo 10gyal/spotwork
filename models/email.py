@@ -24,11 +24,11 @@ class Email:
 
     def _get_email_thread(self):
         """
-        Get the email thread from the database.
+        Get the email thread from the database. Implement later.
         """
         pass
 
-    def compose_email(self):
+    def compose_email(self, system_prompt: str):
         """
         Compose the email based on the email thread.
         """
