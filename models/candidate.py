@@ -17,9 +17,12 @@ class Candidate:
         Get the resume data from the retrieved data. Reconstruct the resume into a single string.
         """
         data = json.loads(self.data).get("data")
-        summary = data.get("summary", "").get("summary")
-        experience = data.get("experience")
-        education = data.get("education")
+        city = data.get("contact", {}).get("city", {}).get("value", "")
+        country = data.get("contact", {}).get("country", {}).get("value", "")
+        current_location = f"{city}, {country}"
+        summary = data.get("summary", {}).get("summary")
+        experience = data.get("experience", {})
+        education = data.get("education", {})
 
         exps = ""
         # experience is a dict with key = exp_id and value = dict containing e_index. order by the key e_index
@@ -41,7 +44,7 @@ class Candidate:
             location = edu.get("location", "")
             edus += f"{qualification}\n{institution} | {date}, {location}\n\n"
 
-        resume = f"Summary\n{summary}\n\nExperience\n{exps}Education\n{edus}"
+        resume = f"Current Location: {current_location}\n\nSummary\n{summary}\n\nExperience\n{exps}Education\n{edus}"
         return resume
 
 
@@ -67,7 +70,7 @@ class Candidate:
         }
 
 if __name__ == "__main__":
-    c = Candidate("006CK3pwiGdp0DhSsKTM")
-    print(c.data)
+    c = Candidate("lIcCiymPg4F78buJ1EDy")
+    # print(c.data)
     print(c.get_resume())
     print(c.get_user_info())

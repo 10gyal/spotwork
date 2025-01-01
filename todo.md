@@ -10,7 +10,7 @@
 - Feed the curated JPs into ES
 - Retrieve Results + User contact information
 - Retrieve Recruiting company contact information
-- Validate the top candidates from ES with the actual JP
+- Verify the top candidates from ES with the actual JP
 
 ### Communication
 - Email the top selected candidates if they would like to be connected to the recruiting company

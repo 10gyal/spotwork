@@ -62,6 +62,8 @@ class FirestoreClient:
         """
         try:
             doc = self.get_resumes_collection().document(resume_id).get().to_dict()
+            if not doc:
+                return f"Resume {resume_id} not found"
             return json.dumps(doc, indent=4)
         
         except Exception as e:
