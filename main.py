@@ -43,7 +43,7 @@ def process_job_postings(url: str) -> List[Dict]:
 
 if __name__ == "__main__":
     # Example usage with a starting URL
-    starting_url = "https://www.ycombinator.com/companies/hyperdx/jobs"
+    starting_url = "https://news.ycombinator.com/item?id=42455372"
     processed_jobs = process_job_postings(starting_url)
     
     # Display results
